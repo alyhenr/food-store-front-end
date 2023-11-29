@@ -1,10 +1,23 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import NavBar from "./components/NavBar"
+import Orders from "./pages/Orders";
+import Kitchen from "./pages/Kitchen";
+import TakeAway from "./pages/TakeAway";
 
 function App() {
 
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <main className="grid grid-cols-1 gap-y-10 py-24 px-32">
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Orders />} />
+          <Route path="/kitchen" element={<Kitchen />} />
+          <Route path="/takeaway" element={<TakeAway />} />
+        </Routes>
+      </Router>
+    </main>
   )
 }
 
