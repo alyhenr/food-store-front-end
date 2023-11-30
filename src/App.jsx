@@ -8,7 +8,7 @@ import TakeAway from "./pages/TakeAway";
 function App() {
 
   return (
-    <main className="grid grid-cols-1 gap-y-10 py-24 px-32">
+    <main className="grid grid-cols-1 gap-y-6 py-32 px-64">
       <Router>
         <NavBar />
         <Routes>
