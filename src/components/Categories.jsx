@@ -22,7 +22,7 @@ const Categories = ({ setCategory }) => {
             <h2 className="font-extrabold text-xl">Categorias</h2>
             <p>Navegue por categoria</p>
 
-            <div className="flex justify-between items-center flex-wrap">
+            <div className="flex flex-col sm:flex-row justify-center sm:justify-start gap-x-14 items-center flex-wrap">
                 {
                     (isFetching || !data) ? "Loading..." : <>
                         {

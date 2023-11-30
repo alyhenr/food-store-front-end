@@ -17,14 +17,14 @@ const Products = ({ category }) => {
 
             return data;
         }
-    })
-    console.log(category);
+    });
+
     return (
         <div>
             <h2 className="font-extrabold text-xl mt-14">Produtos</h2>
             <p>Selecione um produto para adicionar ao seu pedido</p>
 
-            <div className="flex justify-center gap-x-28 gap-y-10 items-center flex-wrap">
+            <div className="flex justify-center sm:justify-start gap-x-20 gap-y-10 items-center flex-wrap">
                 {(isFetching || !data) ? "Loading..." : category !== 'all'
                     ? data.filter(product => product.name === category).map(
                         product => <ProductCard

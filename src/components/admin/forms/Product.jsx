@@ -66,7 +66,7 @@ const Product = () => {
             <div className="flex flex-col items-start md:flex-row justify-between md:items-center gap-x-10 h-24 w-full">
                 <label htmlFor="price">Preço: </label>
                 <input
-                    onChange={(ev) => setForm(prev => ({ ...prev, [ev.target.name]: ev.target.value, }))}
+                    onChange={(ev) => setForm(prev => ({ ...prev, [ev.target.name]: Number(ev.target.value) * 100, }))}
                     value={form.price || ""}
                     className="h-16 w-[50%] bg-slate-200 rounded-sm p-3" type="text" name="price" id="price" />
             </div>
@@ -84,7 +84,7 @@ const Product = () => {
                 </ul>
             }
             <LargeButton
-                customstyles={`place-self-end hover:bg-[#125c13]`}
+                customstyles={`place-self-end`}
                 text={"Add new Product"}
             />
         </form>

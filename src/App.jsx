@@ -12,7 +12,7 @@ function App() {
   const client = new QueryClient();
 
   return (
-    <main className="grid grid-cols-1 gap-y-6 py-32 md:px-64 px-16">
+    <main className="grid grid-cols-1 gap-y-6 py-32 px-32 2xl:px-48">
       <Router>
         <QueryClientProvider client={client}>
           <NavBar />
