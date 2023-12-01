@@ -15,7 +15,7 @@ import LargeButton from "../components/ui/LargeButton";
 import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
-    let clientCode = 1;
+    const [clientCode, setClientCode] = useState(1);
     let totalToPay = 0;
 
     const [clientName, setClientName] = useState("");
@@ -28,14 +28,13 @@ const Payment = () => {
             const response = await axios.get(`${API_URL}/clients`);
             const { data } = response;
 
+            const codes = data.filter(client => client.code).map(client => client.code);
+            if (codes.length > 0) {
+                setClientCode(Math.max(...codes) + 1);
+            }
+            console.log(codes);
             return data;
         },
-        onSuccess: () => {
-            const codes = data.filter(client => !!client.code);
-            if (codes.length > 0) {
-                clientCode = Math.max(...codes) + 1;
-            }
-        }
     });
 
     const navigate = useNavigate();
@@ -50,17 +49,23 @@ const Payment = () => {
                     clientName,
                     quantity: cartContent[productsId[i]].quantity,
                     total: cartContent[productsId[i]].total,
-                    observations: cartContent[productsId[i]].observations ?? null,
-                    additionals: cartContent[productsId[i]].additionals,
+                    paymentMethod,
+                    clientCode,
                 }
 
-                const response = await axios.post("/orders", payload);
+                if (cartContent[productsId[i]].observations && cartContent[productsId[i]].observations !== "")
+                    payload.observations = cartContent[productsId[i]].observations;
+
+                if (cartContent[productsId[i]].additionals && cartContent[productsId[i]].additionals.length > 0)
+                    payload.additionals = cartContent[productsId[i]].additionals;
+
+                const response = await axios.post(`${API_URL}/orders`, payload);
                 const { data } = response;
 
                 return data;
             }
         },
-        onSuccess: () => { navigate("/takeaway"); setCartContent({}); }
+        onSuccess: () => { navigate("/kitchen"); setCartContent({}); }
     });
 
     return (
