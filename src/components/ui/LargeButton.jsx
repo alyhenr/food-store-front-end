@@ -5,9 +5,9 @@ const LargeButton = (props) => {
     const { text, customstyles, isloading = false } = props;
     return (
         <button
-            {...props}
             disabled={isloading}
-            className={`w-80 h-14 text-lg font-bold text-cente rounded-2xl bg-[#aaa] hover:opacity-[95%] hover:bg-[#125c13] ${customstyles}`}>
+            {...props}
+            className={`w-80 h-14 text-lg cursor-pointer font-bold text-center rounded-2xl bg-[#aaa] hover:opacity-[95%] hover:bg-[#125c13] ${customstyles}`}>
             {text}
         </button>
     )

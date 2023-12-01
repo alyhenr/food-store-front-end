@@ -6,6 +6,8 @@ import ProductCard from "./ProductCard"
 
 import axios from "axios";
 import { API_URL } from "../api/config";
+import { useContext } from "react";
+import { CartContext } from "../context/CartProvider";
 
 const Products = ({ categoryId }) => {
 
@@ -18,6 +20,8 @@ const Products = ({ categoryId }) => {
             return data;
         }
     });
+
+    const { cartContent } = useContext(CartContext);
 
     return (
         <div>
@@ -34,6 +38,7 @@ const Products = ({ categoryId }) => {
                             imageUrl={product.imageUrl}
                             description={product.description}
                             price={product.price}
+                            selected={!!cartContent[product.id]}
                         />
                     )
                     : data.map(
@@ -44,6 +49,7 @@ const Products = ({ categoryId }) => {
                             imageUrl={product.imageUrl}
                             description={product.description}
                             price={product.price}
+                            selected={!!cartContent[product.id]}
                         />
                     )
                 }

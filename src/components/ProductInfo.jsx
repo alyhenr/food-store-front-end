@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 
@@ -9,11 +9,23 @@ import LargeButton from "./ui/LargeButton";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { API_URL } from "../api/config";
+import { CartContext } from "../context/CartProvider";
+import { useNavigate } from "react-router-dom";
 
 const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, price } }) => {
+    const { cartContent, setCartContent } = useContext(CartContext);
+
     const [quantity, setQuantity] = useState(1);
     const [additionals, setAdditionals] = useState(new Set());
-    const [total, setTotal] = useState(price);
+    const [total, setTotal] = useState(price); //product + additionals, not multiplied for the quantity
+
+    useEffect(() => {
+        if (cartContent[id]) {
+            setQuantity(cartContent[id].quantity);
+            setAdditionals(cartContent[id].additionals);
+            setTotal(cartContent[id].total);
+        }
+    }, [])
 
     const { data, isLoading } = useQuery({
         queryKey: [`additionals-product-info-${id}`],
@@ -24,6 +36,18 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
             return data;
         }
     });
+
+    const navigate = useNavigate();
+    const handleOrderCreation = (goToPayment) => {
+        setCartContent(prev => ({
+            ...prev, [id]: {
+                quantity, total, additionals
+            }
+        }));
+
+        closeModal();
+        if (goToPayment) navigate("/payment");
+    }
 
     return (
         <div className="z-30 fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
@@ -106,8 +130,18 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
 
                         </div>
                         <div className="md:place-self-end flex md:flex-row gap-10 mt-12 flex-col items-center w-full">
-                            <LargeButton isloading={isLoading} text={"Continuar adicionando"} customstyles={`bg-white border border-green-900 text-green-900 hover:text-white`} />
-                            <LargeButton isloading={isLoading} text={"Adicionar ao pedido"} customstyles={`bg-green-900 border border-green-900 text-white`} />
+                            <LargeButton
+                                onClick={() => {
+                                    if (quantity === 0) closeModal();
+                                    handleOrderCreation(false);
+                                }}
+                                isloading={isLoading} text={"Continuar adicionando"} customstyles={`bg-white border border-green-900 text-green-900 hover:text-white`} />
+                            <LargeButton
+                                onClick={() => {
+                                    if (quantity === 0) closeModal();
+                                    handleOrderCreation(true);
+                                }}
+                                isloading={isLoading} text={"Adicionar ao pedido"} customstyles={`bg-green-900 border border-green-900 text-white`} />
                         </div>
                     </div>
                 </div>
