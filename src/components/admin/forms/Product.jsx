@@ -72,6 +72,7 @@ const Product = () => {
                     value={form.price || ""}
                     className="h-16 md:w-[50%] bg-slate-200 w-full rounded-sm p-3" type="text" name="price" id="price" />
             </div>
+            <h2 className="mt-2 font-bold text-md">R$ {form.price ? (Number(form.price) / 100).toFixed(2) : 0}</h2>
             {
                 isLoading ? "Loading..." : <ul className="place-self-center flex gap-20 flex-wrap m-5">
                     {categories.map(cat => <li

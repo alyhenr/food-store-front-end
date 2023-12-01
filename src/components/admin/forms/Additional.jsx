@@ -10,7 +10,7 @@ const Product = () => {
     const [form, setForm] = useState({});
 
     const { mutate: addProduct, isLoading } = useMutation({
-        mutationKey: ['add-new-product'],
+        mutationKey: ['add-new-additional'],
         mutationFn: async (ev) => {
             ev.preventDefault();
 
@@ -59,6 +59,7 @@ const Product = () => {
                     value={form.price || ""}
                     className="h-16 md:w-[50%] bg-slate-200 w-full rounded-sm p-3" type="text" name="price" id="price" />
             </div>
+            <h2 className="mt-2 font-bold text-md">R$ {form.price ? (Number(form.price) / 100).toFixed(2) : 0}</h2>
             <LargeButton
                 isloading={isLoading}
                 customstyles={`place-self-end`}

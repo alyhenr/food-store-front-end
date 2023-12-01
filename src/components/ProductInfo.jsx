@@ -18,6 +18,7 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
     const [quantity, setQuantity] = useState(1);
     const [additionals, setAdditionals] = useState(new Set());
     const [total, setTotal] = useState(price); //product + additionals, not multiplied for the quantity
+    const [observations, setObservations] = useState("");
 
     useEffect(() => {
         if (cartContent[id]) {
@@ -41,7 +42,7 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
     const handleOrderCreation = (goToPayment) => {
         setCartContent(prev => ({
             ...prev, [id]: {
-                quantity, total, additionals
+                quantity, total, additionals, name, observations
             }
         }));
 
@@ -126,7 +127,8 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
                         </div>
                         <div className="mt-10 w-full rounded-lg">
                             <h2 className="text-lg font-extrabold mb-2">Observações</h2>
-                            <input type="text" placeholder="Adicione uma observação ao pedido" className="h-28 w-full bg-gray-100 rounded-lg text-start flex items-start relative placeholder:absolute placeholder:top-4 placeholder:left-4" />
+                            <input value={observations} onChange={ev => setObservations(ev.target.value)}
+                                type="text" placeholder="Adicione uma observação ao pedido" className="h-28 w-full bg-gray-100 rounded-lg text-start flex items-start relative placeholder:absolute placeholder:top-4 placeholder:left-4" />
 
                         </div>
                         <div className="md:place-self-end flex md:flex-row gap-10 mt-12 flex-col items-center w-full">

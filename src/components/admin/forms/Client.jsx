@@ -10,7 +10,7 @@ const Product = () => {
     const [form, setForm] = useState({});
 
     const { mutate: addProduct, isLoading } = useMutation({
-        mutationKey: ['add-new-product'],
+        mutationKey: ['add-new-client'],
         mutationFn: async (ev) => {
             ev.preventDefault();
 
