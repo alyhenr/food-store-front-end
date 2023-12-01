@@ -23,7 +23,7 @@ const Product = () => {
         },
         onSuccess: () => { setForm({}); }
     });
-    console.log(form);
+
     return (
         <form
             className="flex flex-col gap-y-3 border border-slate-100 p-3 rounded-lg -mt-8 w-full shadow-md"

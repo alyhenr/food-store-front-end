@@ -9,7 +9,7 @@ import { API_URL } from "../api/config";
 import { useContext } from "react";
 import { CartContext } from "../context/CartProvider";
 
-const Products = ({ categoryId }) => {
+const Products = ({ categoryId, search }) => {
 
     const { data, isFetching } = useQuery({
         queryKey: ["products"],
@@ -41,17 +41,29 @@ const Products = ({ categoryId }) => {
                             selected={!!cartContent[product.id]}
                         />
                     )
-                    : data.map(
-                        product => <ProductCard
-                            key={product.id}
-                            id={product.id}
-                            name={product.name}
-                            imageUrl={product.imageUrl}
-                            description={product.description}
-                            price={product.price}
-                            selected={!!cartContent[product.id]}
-                        />
-                    )
+                    : search.length > 0
+                        ? data.filter(product => product.name.toLowerCase().includes(search)).map(
+                            product => <ProductCard
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
+                                imageUrl={product.imageUrl}
+                                description={product.description}
+                                price={product.price}
+                                selected={!!cartContent[product.id]}
+                            />
+                        )
+                        : data.map(
+                            product => <ProductCard
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
+                                imageUrl={product.imageUrl}
+                                description={product.description}
+                                price={product.price}
+                                selected={!!cartContent[product.id]}
+                            />
+                        )
                 }
                 {data && data.length === 0 && <h2 className="font-extrabold text-lg mt-16">
                     There&apos;s no available products right now...
@@ -63,6 +75,7 @@ const Products = ({ categoryId }) => {
 
 Products.propTypes = {
     categoryId: PropTypes.string,
+    search: PropTypes.string,
 }
 
 export default Products
