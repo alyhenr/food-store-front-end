@@ -6,7 +6,7 @@ import ProductInfo from "./ProductInfo";
 
 const ProductCard = ({ id, name, imageUrl, description, price }) => {
     const [showInfo, setShowInfo] = useState(false);
-    console.log(showInfo);
+
     return (
         <>
             <div

@@ -12,6 +12,8 @@ import { API_URL } from "../api/config";
 
 const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, price } }) => {
     const [quantity, setQuantity] = useState(1);
+    const [additionals, setAdditionals] = useState(new Set());
+    const [total, setTotal] = useState(price);
 
     const { data, isLoading } = useQuery({
         queryKey: [`additionals-product-info-${id}`],
@@ -41,28 +43,59 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
 
                                     <div className="flex items-center justify-center w-24 mt-5 border-y-2 border-green-900 bg-slate-50 h-10 relative">
                                         <FaCircleMinus
-                                            onClick={() => setQuantity(prev => prev > 0 ? prev - 1 : 0)}
+                                            onClick={() => { setQuantity(prev => prev > 0 ? prev - 1 : 0); }}
                                             className="cursor-pointer absolute -top-[3px] -left-3.5" color="darkgreen" size={42} />
                                         <h3 className="text-center">{quantity}</h3>
                                         <FaCirclePlus
-                                            onClick={() => setQuantity(prev => prev + 1)}
+                                            onClick={() => { setQuantity(prev => prev + 1); }}
                                             className="cursor-pointer absolute -top-[3px] -right-3.5" color="darkgreen" size={42} />
                                     </div>
                                 </div>
                             </div>
-                            <h2 className="font-extrabold text-xl">R${(Number(price * quantity) / 100).toFixed(2)}</h2>
+                            <h2 className="font-extrabold text-xl">R${Number(total * quantity / 100).toFixed(2)}</h2>
                         </div>
 
-                        <div className="mt-10">
+                        <div className="mt-10 w-full px-8">
                             <h2 className="text-lg font-extrabold">Adicionais</h2>
                             <p className="font-light text-base">
                                 Selecione os ingredientes que você quer adicionar a mais no seu lanche.
                             </p>
                             {isLoading ? "Loading..." : data?.length === 0
                                 ? "Nenhum adicional disponivel para esse produto..."
-                                : <ul className="mt-8 flex flex-col">
-                                    {data.map(additional => <li key={additional.id}>
-                                        { }
+                                : <ul className="mt-8 flex flex-col w-full">
+                                    {data.map(additional => <li key={additional.id} className="flex justify-between">
+                                        <div className="flex gap-5">
+                                            <img
+                                                src={additional.imageUrl}
+                                                alt={`${additional.name} picture`}
+                                                className="w-20 h-16 object-cover rounded-lg"
+                                            />
+                                            <div>
+                                                <h3 className="font-bold text-lg">{additional.name}</h3>
+                                                <p>{additional.description}</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-12 items-center">
+                                            <h4 className="text-[#aaa] text-lg">R${(Number(additional.price) / 100).toFixed(2)}</h4>
+                                            <input
+                                                type="radio"
+                                                className="scale-150 cursor-pointer"
+                                                onClick={() => setAdditionals(prev => {
+                                                    const curr = new Set(prev);
+                                                    if (curr.has(additional.id)) {
+                                                        curr.delete(additional.id);
+                                                        setTotal(prev => Math.max(prev - Number(additional.price), 0));
+                                                    }
+                                                    else {
+                                                        curr.add(additional.id);
+                                                        setTotal(prev => prev + Number(additional.price));
+                                                    }
+                                                    return curr;
+                                                })}
+                                                onChange={(ev) => { ev.target.checked = additionals.has(additional.id); }}
+                                                checked={additionals.has(additional.id)}
+                                            />
+                                        </div>
                                     </li>)}
                                 </ul>
                             }
@@ -72,7 +105,7 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
                             <input type="text" placeholder="Adicione uma observação ao pedido" className="h-28 w-full bg-gray-100 rounded-lg text-start flex items-start relative placeholder:absolute placeholder:top-4 placeholder:left-4" />
 
                         </div>
-                        <div className="place-self-end flex gap-x-10 mt-12">
+                        <div className="md:place-self-end flex md:flex-row gap-10 mt-12 flex-col items-center w-full">
                             <LargeButton isloading={isLoading} text={"Continuar adicionando"} customstyles={`bg-white border border-green-900 text-green-900 hover:text-white`} />
                             <LargeButton isloading={isLoading} text={"Adicionar ao pedido"} customstyles={`bg-green-900 border border-green-900 text-white`} />
                         </div>
