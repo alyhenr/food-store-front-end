@@ -52,10 +52,10 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
 
     return (
         <div className="z-30 fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-            <div className="w-max-[600px] w-[70%]">
-                <div className="bg-white h-full rounded-lg relative flex flex-col">
+            <div className="w-max-[600px] w-[70%] h-[90vh]">
+                <div className="bg-white h-[100%] rounded-lg relative flex flex-col overflow-scroll">
                     <IoClose className="absolute top-5 right-5 cursor-pointer" size={30} onClick={() => closeModal()} />
-                    <div className="flex flex-col px-28 py-12 gap-y-3 items-start">
+                    <div className="flex flex-col px-5 md:px-28 py-12 gap-y-3 items-start">
                         <h1 className="font-extrabold text-2xl">Revise seu pedido!</h1>
                         <div className="flex justify-between w-full p-5">
                             <div className="flex gap-12">
@@ -88,19 +88,20 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
                             {isLoading ? "Loading..." : data?.length === 0
                                 ? "Nenhum adicional disponivel para esse produto..."
                                 : <ul className="mt-8 flex flex-col w-full">
-                                    {data.map(additional => <li key={additional.id} className="flex justify-between">
+                                    {data.map(additional => <li key={additional.id} className="flex flex-col
+                                    md:flex-row gap-2 justify-between">
                                         <div className="flex gap-5">
                                             <img
                                                 src={additional.imageUrl}
                                                 alt={`${additional.name} picture`}
-                                                className="w-20 h-16 object-cover rounded-lg"
+                                                className="hidden sm:flex w-20 h-16 object-cover rounded-lg"
                                             />
                                             <div>
                                                 <h3 className="font-bold text-lg">{additional.name}</h3>
                                                 <p>{additional.description}</p>
                                             </div>
                                         </div>
-                                        <div className="flex gap-12 items-center">
+                                        <div className="flex flex-col md:flex-row gap-3 md:gap-12 items-start md:items-center">
                                             <h4 className="text-[#aaa] text-lg">R${(Number(additional.price) / 100).toFixed(2)}</h4>
                                             <input
                                                 type="radio"

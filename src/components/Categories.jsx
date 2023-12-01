@@ -24,7 +24,9 @@ const Categories = ({ categoryId, setCategoryId }) => {
 
             <div className="flex flex-col sm:flex-row justify-center sm:justify-start gap-x-14 items-center flex-wrap">
                 {
-                    (isFetching || !data) ? "Loading..." : <>
+                    (isFetching || !data) ? <h1 className="text-3xl font-black text-black">
+                        Os dados estão chegando! Se essa for a sua primeira vez acessando esse aplicativo, pode demorar alguns minutos... O banco de dados está hospedado em um serviço gratuito, obrigado!
+                    </h1> : <>
                         {
                             data.map(category => <CategoryCard
                                 key={category.id}

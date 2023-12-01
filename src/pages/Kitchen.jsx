@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react";
 
 import axios from "axios";
-import { useMutation, useQuery } from "react-query"
+import { useMutation } from "react-query";
+
+import { OrdersContext } from "../context/OrdersProvider";
 
 import { API_URL } from "../api/config";
 
@@ -9,20 +11,7 @@ import OrderCard from "../components/OrderCard";
 
 
 const Kitchen = () => {
-    const [orders, setOrders] = useState([]);
-
-    const { isLoading } = useQuery({
-        queryKey: ['orders'],
-        queryFn: async () => {
-            const response = await axios.get(`${API_URL}/orders`);
-
-            const { data } = response;
-
-            setOrders(data);
-            return data;
-        },
-
-    });
+    const { orders, setOrders } = useContext(OrdersContext);
 
     const { mutate: updateOrderStatus } = useMutation({
         mutationKey: ['update-order-status'],
@@ -42,9 +31,9 @@ const Kitchen = () => {
             return data;
         }
     });
-    console.log(orders);
+
     return (
-        (isLoading || !orders) ? "Loading..." :
+        (!orders) ? "Loading..." :
             <div className="flex flex-col sm:flex-row justify-between sm:items-start items-center py-14">
                 <div className="flex flex-col gap-8 w-full sm:w-[45%]">
                     <h1 className="text-3xl font-extrabold">Preparando:</h1>

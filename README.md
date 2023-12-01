@@ -1,8 +1,29 @@
-# React + Vite
+### Devio Full Stack Challenge - Front End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Preview
 
-Currently, two official plugins are available:
+![Alt text](./public/mainPage.png?raw=true "Title")
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Deploy: https://devio-challenge-front-end.vercel.app/
+
+## Technologies I've used:
+
+- Vite
+- React
+- TypeScript
+- Tailwind
+- Axios
+- Tanstack
+- React Icons
+
+Esse aplicativo permite ao usuário selecionar produtos, podendo filtrá-los por categoria ou então buscar algo específico pela barra de pesquisa, além disso, o cliente pode escolher adicionais para seu pedido e também pedir diversos produtos antes de finalizar seu pedido.
+
+Sendo também possível atuar como um administrador e adicionar novos produtos, categorias e adicionais para loja, para isso, pode-se navegar para a rota"/admin" (https://devio-challenge-front-end.vercel.app/admin), e preencher o formulário com os dados a serem adicionados na loja.
+
+Simulando um membro da equipe, pode-se ver os pedidos na cozinho, e acompanhar os status deles, podendo-se atualizá-los, cancelando-os ou indicando que estão prontos para retirada. Por fim, na página de retirada pode-se acompanhar o nome dos clientes que estão tendo seu pedido preparado, ou então pronto para ser retirado.
+
+#### Back end:
+
+O codigo da API desenvolvida esta disponivel no link: https://github.com/alyhenr/devio-challenge-back-end
+
+E em deploy: https://devio-backend-wb03.onrender.com

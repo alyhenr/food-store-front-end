@@ -10,16 +10,15 @@ export const OrdersContext = createContext([]);
 const OrdersProvider = ({ children }) => {
     const [orders, setOrders] = useState([]);
 
-
-    const { data } = useQuery({
+    useQuery({
         queryKey: ['all-orders'],
         queryFn: async () => {
             const response = await axios.get(`${API_URL}/orders`);
             const { data } = response;
 
+            setOrders(data);
             return data;
         },
-        onSuccess: () => { setOrders(data); }
     });
 
     return (

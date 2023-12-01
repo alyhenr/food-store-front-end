@@ -28,11 +28,12 @@ const Payment = () => {
             const response = await axios.get(`${API_URL}/clients`);
             const { data } = response;
 
-            const codes = data.filter(client => client.code).map(client => client.code);
-            if (codes.length > 0) {
-                setClientCode(Math.max(...codes) + 1);
-            }
-            console.log(codes);
+            let newCode = 0;
+            data.forEach(client => {
+                newCode = Math.max(newCode, client.code)
+            });
+
+            setClientCode(newCode + 1);
             return data;
         },
     });
@@ -50,7 +51,6 @@ const Payment = () => {
                     quantity: cartContent[productsId[i]].quantity,
                     total: cartContent[productsId[i]].total,
                     paymentMethod,
-                    clientCode,
                 }
 
                 if (cartContent[productsId[i]].observations && cartContent[productsId[i]].observations !== "")
