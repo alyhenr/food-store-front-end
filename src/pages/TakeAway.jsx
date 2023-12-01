@@ -14,7 +14,7 @@ const TakeAway = () => {
                             <h1 className="text-[56px] font-black text-gray-400">{order.client.name}</h1>
                         </li>)
                     }
-                </ul> : <h3 className="mt-10">Nenhum pedido sendo preparada no momento</h3>}
+                </ul> : <h3 className="mt-10">Nenhum pedido sendo preparado no momento</h3>}
             </div>
             <div className="w-full h-[5px] my-10 sm:hidden md:flex md:w-[5px] md:h-[70vh] bg-black rounded-lg"></div>
             <div className="flex flex-col gap-8 w-full sm:w-[45%] sm:pl-20 pl-2">
@@ -25,7 +25,7 @@ const TakeAway = () => {
                             <h1 className="text-[56px] font-black text-green-900">{order.client.name}</h1>
                         </li>)
                     }
-                </ul> : <h3 className="mt-10">Nenhum pedido sendo preparada no momento</h3>}
+                </ul> : <h3 className="mt-10">Nenhum pedido pronto no momento</h3>}
             </div>
         </div>
     )

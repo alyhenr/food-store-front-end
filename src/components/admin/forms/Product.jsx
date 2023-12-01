@@ -25,11 +25,9 @@ const Product = () => {
         mutationFn: async (ev) => {
             ev.preventDefault();
 
-            if (!selectedCat) return;
+            if (!selectedCat) throw Error("Escolha uma categoria");
 
             const payload = { ...form, categoryId: selectedCat };
-
-            payload.price = Number(payload.price * 100);
 
             const response = await axios.post(`${API_URL}/products`, payload);
             const { data } = response;
@@ -74,7 +72,7 @@ const Product = () => {
             </div>
             <h2 className="mt-2 font-bold text-md">R$ {form.price ? (Number(form.price) / 100).toFixed(2) : 0}</h2>
             {
-                isLoading ? "Loading..." : <ul className="place-self-center flex gap-20 flex-wrap m-5">
+                isLoading ? "Loading..." : categories.length === 0 ? "Não existe nenhuma categoria ainda, crie categerias antes de adicionar produtos." : <ul className="place-self-center flex gap-20 flex-wrap m-5">
                     {categories.map(cat => <li
                         onClick={() => { setSelectedCat(cat.id); }}
                         key={cat.id}

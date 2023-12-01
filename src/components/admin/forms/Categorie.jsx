@@ -21,7 +21,7 @@ const Product = () => {
 
             return data;
         },
-        onSuccess: () => { setForm({}); }
+        onSuccess: () => { setForm({}); location.reload(); }
     });
 
     return (
@@ -46,7 +46,7 @@ const Product = () => {
             <LargeButton
                 isloading={isLoading}
                 customstyles={`place-self-end`}
-                text={"Add new Product"}
+                text={"Add new Categorie"}
             />
         </form>
     )

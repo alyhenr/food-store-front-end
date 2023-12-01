@@ -13,6 +13,7 @@ import { CartContext } from "../context/CartProvider";
 import { API_URL } from "../api/config";
 import LargeButton from "../components/ui/LargeButton";
 import { useNavigate } from "react-router-dom";
+import OrderFinishModal from "../components/OrderFinishModal";
 
 const Payment = () => {
     const [clientCode, setClientCode] = useState(1);
@@ -20,6 +21,7 @@ const Payment = () => {
 
     const [clientName, setClientName] = useState("");
     const [paymentMethod, setPaymentMethod] = useState(undefined);
+    const [finished, setFinished] = useState(false);
 
     const { cartContent, setCartContent } = useContext(CartContext);
     const { data } = useQuery({
@@ -65,8 +67,13 @@ const Payment = () => {
                 return data;
             }
         },
-        onSuccess: () => { navigate("/kitchen"); setCartContent({}); }
+        onSuccess: () => {
+            setCartContent({});
+            setFinished(true);
+        }
     });
+
+    if (finished) return <OrderFinishModal />
 
     return (
         <>  <div>
@@ -85,9 +92,12 @@ const Payment = () => {
                                     totalToPay += cartContent[productId].total * cartContent[productId].quantity;
                                     return (
                                         <li key={productId}>
-                                            <div className="flex justify-between text-base font-light">
-                                                <p>{cartContent[productId].quantity}x {cartContent[productId].name}</p>
-                                                <p>R$ {(Number(cartContent[productId].total) / 100).toFixed(2)}</p>
+                                            <div>
+                                                <div className="flex justify-between text-base font-light">
+                                                    <p>{cartContent[productId].quantity}x {cartContent[productId].name}</p>
+                                                    <p>R$ {(Number(cartContent[productId].total) / 100).toFixed(2)}</p>
+                                                </div>
+                                                <p>{cartContent[productId].additionals?.size > 0 ? "Com adicionais" : "Nenhum adicional foi escolhido"}</p>
                                             </div>
                                         </li>
                                     )
@@ -97,7 +107,7 @@ const Payment = () => {
 
                         <div className="flex justify-between">
                             <h3>Total do pedido:</h3>
-                            <h1 className="text-3xl font-black">R$ {totalToPay > 0 ? (Number(totalToPay) / 100).toFixed(2) : "Carrinho vazio"}</h1>
+                            <h1 className="text-3xl font-black">{totalToPay > 0 ? `R$ ${(Number(totalToPay) / 100).toFixed(2)}` : "Carrinho vazio"}</h1>
                         </div>
                     </div>
 

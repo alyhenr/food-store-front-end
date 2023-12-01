@@ -16,8 +16,6 @@ const Product = () => {
 
             const payload = { ...form };
 
-            payload.price = Number(payload.price * 100);
-
             const response = await axios.post(`${API_URL}/additionals`, payload);
             const { data } = response;
 

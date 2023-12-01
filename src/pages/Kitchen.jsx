@@ -35,7 +35,7 @@ const Kitchen = () => {
                                 <OrderCard order={order} updateOrderStatus={updateOrderStatus} />
                             </li>)
                         }
-                    </ul> : <h3 className="mt-10">Nenhum pedido sendo preparada no momento</h3>}
+                    </ul> : <h3 className="mt-10">Nenhum pedido sendo preparado no momento</h3>}
                 </div>
                 <div className="w-full h-[1px] my-10 sm:hidden md:flex md:w-[1px] md:h-[70vh] bg-black rounded-lg"></div>
                 <div className="flex flex-col gap-8 w-full sm:w-[45%] sm:pl-12 pl-2">
@@ -46,7 +46,7 @@ const Kitchen = () => {
                                 <OrderCard order={order} updateOrderStatus={updateOrderStatus} />
                             </li>)
                         }
-                    </ul> : <h3 className="mt-10">Nenhum pedido sendo preparada no momento</h3>}
+                    </ul> : <h3 className="mt-10">Nenhum pedido pronto ainda... A caminho</h3>}
                 </div>
             </div>
 
