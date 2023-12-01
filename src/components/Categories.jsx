@@ -6,7 +6,7 @@ import CategoryCard from "./CategoryCard"
 import axios from "axios";
 import { API_URL } from "../api/config";
 
-const Categories = ({ setCategory }) => {
+const Categories = ({ categoryId, setCategoryId }) => {
     const { data, isFetching } = useQuery({
         queryKey: ["categories"],
         queryFn: async () => {
@@ -30,7 +30,8 @@ const Categories = ({ setCategory }) => {
                                 key={category.id}
                                 name={category.name}
                                 imageUrl={category.imageUrl}
-                                setCategory={() => setCategory(category.name.toLowerCase())}
+                                setCategoryId={() => setCategoryId(prev => prev === category.id ? null : category.id)}
+                                selected={category.id === categoryId}
                             />)
                         }
                     </>
@@ -41,7 +42,8 @@ const Categories = ({ setCategory }) => {
 }
 
 Categories.propTypes = {
-    setCategory: PropTypes.func,
+    setCategoryId: PropTypes.func,
+    categoryId: PropTypes.string,
 }
 
 export default Categories

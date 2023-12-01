@@ -7,7 +7,7 @@ import ProductCard from "./ProductCard"
 import axios from "axios";
 import { API_URL } from "../api/config";
 
-const Products = ({ category }) => {
+const Products = ({ categoryId }) => {
 
     const { data, isFetching } = useQuery({
         queryKey: ["products"],
@@ -24,11 +24,12 @@ const Products = ({ category }) => {
             <h2 className="font-extrabold text-xl mt-14">Produtos</h2>
             <p>Selecione um produto para adicionar ao seu pedido</p>
 
-            <div className="flex justify-center sm:justify-start gap-x-20 gap-y-10 items-center flex-wrap">
-                {(isFetching || !data) ? "Loading..." : category !== 'all'
-                    ? data.filter(product => product.name === category).map(
+            <div className="flex justify-center sm:justify-start gap-x-14 gap-y-10 items-center flex-wrap">
+                {(isFetching || !data) ? "Loading..." : categoryId
+                    ? data.filter(product => product.categoryId === categoryId).map(
                         product => <ProductCard
                             key={product.id}
+                            id={product.id}
                             name={product.name}
                             imageUrl={product.imageUrl}
                             description={product.description}
@@ -38,6 +39,7 @@ const Products = ({ category }) => {
                     : data.map(
                         product => <ProductCard
                             key={product.id}
+                            id={product.id}
                             name={product.name}
                             imageUrl={product.imageUrl}
                             description={product.description}
@@ -54,7 +56,7 @@ const Products = ({ category }) => {
 }
 
 Products.propTypes = {
-    category: PropTypes.string,
+    categoryId: PropTypes.string,
 }
 
 export default Products

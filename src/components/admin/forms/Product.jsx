@@ -84,6 +84,7 @@ const Product = () => {
                 </ul>
             }
             <LargeButton
+                isloading={isLoading}
                 customstyles={`place-self-end`}
                 text={"Add new Product"}
             />
