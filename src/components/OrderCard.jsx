@@ -13,9 +13,9 @@ const OrderCard = ({ order, updateOrderStatus }) => {
                     alt={`${order.product.name} picture`}
                     className="w-20 h-20 rounded-xl"
                 />
-                <div>
+                <div className="w-full">
                     <h2 className="font-extrabold text-md w-32 overflow-ellipsis">{order.client.code ?? "001"} - {order.client.name}</h2>
-                    <p className="text-md font-extralight overflow-ellipsis sm:flex hidden">{order.quantity}x {order.product.name}</p>
+                    <p className="text-md w-32 font-extralight sm:flex hidden overflow-ellipsis">{order.quantity}x {order.product.name}</p>
                 </div>
             </div>
             <div className="flex gap-5 flex-col sm:flex-row">

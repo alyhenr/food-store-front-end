@@ -11,23 +11,15 @@ import OrderCard from "../components/OrderCard";
 
 
 const Kitchen = () => {
-    const { orders, setOrders } = useContext(OrdersContext);
+    const { orders } = useContext(OrdersContext);
 
     const { mutate: updateOrderStatus } = useMutation({
         mutationKey: ['update-order-status'],
         mutationFn: async ({ id, status }) => {
-            setOrders(prev => {
-                let updatedOrder;
-                const nonUpdatedOrders = prev.filter(order => {
-                    if (order.id === id) updatedOrder = order;
-                    return order.id !== id
-                });
-                updatedOrder.status = status;
-                setOrders([...nonUpdatedOrders, updatedOrder]);
-            })
             const response = await axios.put(`${API_URL}/orders/${id}`, { status });
             const { data } = response;
 
+            location.reload();
             return data;
         }
     });
