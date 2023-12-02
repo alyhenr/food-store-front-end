@@ -1,4 +1,4 @@
-### Devio Full Stack Challenge - Front End
+### Food Store - Front End
 
 ## Preview
 
