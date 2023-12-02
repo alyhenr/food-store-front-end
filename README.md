@@ -6,11 +6,10 @@
 
 ### Deploy: https://devio-challenge-front-end.vercel.app/
 
-## Technologies I've used:
+## Tecnologias utilizadas:
 
 - Vite
 - React
-- TypeScript
 - Tailwind
 - Axios
 - Tanstack
