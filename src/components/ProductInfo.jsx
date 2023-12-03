@@ -52,7 +52,7 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
 
     return (
         <div className="z-30 fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-            <div className="w-max-[600px] w-[70%] h-[90vh]">
+            <div className="w-max-[600px] w-[95%] sm:w-[70%] h-[90vh]">
                 <div className="bg-white h-[100%] rounded-lg relative flex flex-col overflow-scroll">
                     <IoClose className="absolute top-5 right-5 cursor-pointer" size={30} onClick={() => closeModal()} />
                     <div className="flex flex-col px-5 md:px-28 py-12 gap-y-3 items-center sm:items-start">
