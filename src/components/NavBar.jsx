@@ -4,7 +4,7 @@ import { IoFastFood } from "react-icons/io5";
 
 const NavBar = () => {
     return (
-        <nav className="z-20 fixed top-0 left-0 w-full h-14 bg-[#125c13] flex justify-between p-2 px-12">
+        <nav className="z-20 fixed top-0 left-0 w-full h-24 sm:h-14 bg-[#125c13] flex flex-col sm:flex-row justify-between p-2 px-12 items-center">
             <Link to={"/"}>
                 <div className="flex items-center  gap-2">
                     <IoFastFood size={35} color="white" />

@@ -1,12 +1,13 @@
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import LargeButton from "./ui/LargeButton";
 
 const OrderFinishModal = () => {
     const navigate = useNavigate();
     return (
         <div className="z-30 fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-            <div className="w-max-[600px] w-[40%] h-[450px]">
-                <div className="bg-white h-[100%] rounded-lg relative flex flex-col">
+            <div className="w-max-[600px] w-[90%] md:w-[40%] h-[450px]">
+                <div className="bg-white h-[100%] rounded-lg relative flex flex-col p-2 md:p-0">
                     <IoClose className="absolute top-5 right-5 cursor-pointer" size={30} onClick={() => navigate("/takeaway")} />
                     <div className="flex flex-col justify-start items-center w-full h-full gap-2">
                         <img
@@ -16,6 +17,7 @@ const OrderFinishModal = () => {
                         />
                         <h1 className="text-3xl font-black">Pedido finalizado com sucesso!</h1>
                         <p className="text-md mt-2">O pedido foi encaminhado para a cozinha.</p>
+                        <LargeButton text="Ver andamento" customstyles={`m-2`} onClick={() => navigate("/kitchen")} />
                     </div>
                 </div>
             </div>

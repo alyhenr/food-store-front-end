@@ -44,7 +44,7 @@ const Orders = () => {
             <SearchBar search={search} setSearch={setSearch} />
             <Categories categoryId={categoryId} setCategoryId={setCategoryId} />
             <Products categoryId={categoryId} search={search} />
-            <div className="place-self-start md:place-self-end mt-20 flex flex-wrap gap-x-16 gap-y-10">
+            <div className="place-self-start md:place-self-end mt-20 flex justify-center sm:justify-start flex-wrap gap-x-16 gap-y-10">
                 <LargeButton
                     onClick={() => setCartContent({})}
                     text={"Cancelar"}

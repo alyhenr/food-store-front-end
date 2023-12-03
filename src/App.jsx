@@ -16,7 +16,7 @@ function App() {
   const client = new QueryClient();
 
   return (
-    <main className="grid grid-cols-1 gap-y-6 py-32 px-32 2xl:px-48">
+    <main className="grid grid-cols-1 gap-y-6 py-32 px-2 sm:px-32 2xl:px-48">
       <Router>
         <QueryClientProvider client={client}>
           <ClientProvider>

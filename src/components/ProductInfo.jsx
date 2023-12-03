@@ -55,15 +55,15 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
             <div className="w-max-[600px] w-[70%] h-[90vh]">
                 <div className="bg-white h-[100%] rounded-lg relative flex flex-col overflow-scroll">
                     <IoClose className="absolute top-5 right-5 cursor-pointer" size={30} onClick={() => closeModal()} />
-                    <div className="flex flex-col px-5 md:px-28 py-12 gap-y-3 items-start">
+                    <div className="flex flex-col px-5 md:px-28 py-12 gap-y-3 items-center sm:items-start">
                         <h1 className="font-extrabold text-2xl">Revise seu pedido!</h1>
-                        <div className="flex justify-between w-full p-5">
-                            <div className="flex gap-12">
-                                <div className="w-56 h-56 mt-10 shadow-lg rounded-lg flex flex-col justify-between items-center px-3 py-7 text-center hover:shadow-2xl">
+                        <div className="flex justify-between w-full p-5 flex-col lg:flex-row items-center lg:items-start">
+                            <div className="flex gap-12 flex-col lg:flex-row items-center">
+                                <div className="w-56 h-56 mt-10 shadow-lg rounded-lg flex flex-col justify-center items-center px-3 py-7 text-center hover:shadow-2xl">
                                     <img src={imageUrl} alt={`${name} picture`} className="w-40 rounded-xl" />
                                 </div>
-                                <div>
-                                    <h2 className="font-extrabold text-xl">{name}</h2>
+                                <div className="flex flex-col items-center">
+                                    <h2 className="font-extrabold text-xl flex flex-wrap">{name}</h2>
                                     <p className="font-light mt-2">{description}</p>
 
                                     <div className="flex items-center justify-center w-24 mt-5 border-y-2 border-green-900 bg-slate-50 h-10 relative">
@@ -77,7 +77,7 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
                                     </div>
                                 </div>
                             </div>
-                            <h2 className="font-extrabold text-xl">R${Number(total * quantity / 100).toFixed(2)}</h2>
+                            <h2 className="font-extrabold text-xl place-self-start sm:place-self-center mt-5 lg:mt-0">R${Number(total * quantity / 100).toFixed(2)}</h2>
                         </div>
 
                         <div className="mt-10 w-full px-8">
@@ -89,7 +89,7 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
                                 ? "Nenhum adicional disponivel para esse produto..."
                                 : <ul className="mt-8 flex flex-col w-full">
                                     {data.map(additional => <li key={additional.id} className="flex flex-col
-                                    md:flex-row gap-2 justify-between">
+                                    lg:flex-row gap-2 justify-between">
                                         <div className="flex gap-5">
                                             <img
                                                 src={additional.imageUrl}
@@ -101,7 +101,7 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
                                                 <p>{additional.description}</p>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col md:flex-row gap-3 md:gap-12 items-start md:items-center">
+                                        <div className="flex gap-3 md:gap-12 items-start md:items-center flex-row-reverse md:flex-row justify-end">
                                             <h4 className="text-[#aaa] text-lg">R${(Number(additional.price) / 100).toFixed(2)}</h4>
                                             <input
                                                 type="radio"
@@ -138,13 +138,13 @@ const ProductInfo = ({ closeModal, product: { id, name, imageUrl, description, p
                                     if (quantity === 0) closeModal();
                                     handleOrderCreation(false);
                                 }}
-                                isloading={isLoading} text={"Continuar adicionando"} customstyles={`bg-white border border-green-900 text-green-900 hover:text-white`} />
+                                isloading={isLoading} text={"Continuar adicionando"} customstyles={`max-w-[90%] bg-white border border-green-900 text-green-900 hover:text-white`} />
                             <LargeButton
                                 onClick={() => {
                                     if (quantity === 0) closeModal();
                                     handleOrderCreation(true);
                                 }}
-                                isloading={isLoading} text={"Adicionar ao pedido"} customstyles={`bg-green-900 border border-green-900 text-white`} />
+                                isloading={isLoading} text={"Adicionar ao pedido"} customstyles={`max-w-[90%] bg-green-900 border border-green-900 text-white`} />
                         </div>
                     </div>
                 </div>

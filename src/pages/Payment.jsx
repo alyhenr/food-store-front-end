@@ -81,8 +81,8 @@ const Payment = () => {
                 <FaCreditCard size={25} color="darkgreen" />
                 <h1 className="font-black text-3xl">Pagamento</h1>
             </div>
-            <div className="flex justify-between">
-                <div className="w-[45%] flex flex-col flex-wrap">
+            <div className="flex justify-between flex-col md:flex-row items-center">
+                <div className="md:w-[45%] w-full flex flex-col flex-wrap">
                     <p className="font-extrabold text-base">Resumo da compra</p>
                     <div className="mt-5 p-10 w-full h-fit border border-[#aaa] rounded-lg">
                         <ul>
@@ -135,7 +135,7 @@ const Payment = () => {
                     </div>
                 </div>
 
-                <div className="w-[40%]">
+                <div className="md:w-[40%] w-full">
                     <p className="font-extrabold text-base">Selecione a forma de pagamento:</p>
                     <div className="mt-3 flex flex-col gap-5">
                         <div
@@ -185,7 +185,7 @@ const Payment = () => {
             </div>
 
         </div>
-            <div className="flex flex-wrap place-self-end gap-x-8 mt-20">
+            <div className="flex flex-wrap md:place-self-end gap-x-8 mt-20 justify-center gap-2">
                 <LargeButton
                     onClick={() => { navigate("/"); }}
                     text={"Cancelar"}
